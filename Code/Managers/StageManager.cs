@@ -30,7 +30,6 @@ namespace HN.Code.Managers
         public MapTree CurrentMapTree { get; private set; }
         public MapTree MapRoot { get; private set; }
         public int StageDepth { get; private set; } = 0;
-        private readonly List<MapTree> _mapRenderList = new List<MapTree>();
         private readonly Dictionary<StageDataSO, List<Stage>> _stagePairs = new Dictionary<StageDataSO, List<Stage>>();
         private List<StageDataSO> _stageList = new List<StageDataSO>();
 
