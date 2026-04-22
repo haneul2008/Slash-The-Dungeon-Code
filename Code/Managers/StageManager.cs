@@ -22,6 +22,7 @@ namespace HN.Code.Managers
         [SerializeField] private StageListSO stageList;
         [SerializeField] private int stageLength;
         [SerializeField] private GameEventChannelSO stageChannel;
+        [SerializeField] private GameEventChannelSO gameChannel;
         [SerializeField] private StageDataSO initStage;
         [SerializeField] private StageDataSO bossStage;
         [SerializeField] private List<Stage> stages;
@@ -51,19 +52,20 @@ namespace HN.Code.Managers
             
             stageChannel.AddListener<StageSpawnEvent>(HandleStageSpawn);
             stageChannel.AddListener<StageSelectEvent>(HandleStageSelect);
-            stageChannel.AddListener<StageInitEvent>(HandleStageInit);
+            gameChannel.AddListener<GameStartEvent>(HandleGameStart);
         }
 
         private void OnDestroy()
         {
             stageChannel.RemoveListener<StageSpawnEvent>(HandleStageSpawn);
             stageChannel.RemoveListener<StageSelectEvent>(HandleStageSelect);
-            stageChannel.RemoveListener<StageInitEvent>(HandleStageInit);
+            gameChannel.RemoveListener<GameStartEvent>(HandleGameStart);
         }
 
-        private void HandleStageInit(StageInitEvent evt)
+        private void HandleGameStart(GameStartEvent evt)
         {
             CreateMap();
+            stageChannel.RaiseEvent(StageEvents.StageInitEvent);
         }
 
         public void CreateMap()

@@ -9,7 +9,6 @@ namespace HN.Code.Managers
         public float PlayTime => Mathf.RoundToInt(Time.time - _gameStartTime);
         public int ClearedStageCnt { get; private set; }
 
-        [SerializeField] private GameEventChannelSO stageChannel;
         [SerializeField] private GameEventChannelSO gameChannel;
         
         private float _gameStartTime;
@@ -33,7 +32,6 @@ namespace HN.Code.Managers
         {
             _gameStartTime = Time.time;
             ClearedStageCnt = 0;
-            stageChannel.RaiseEvent(StageEvents.StageInitEvent);
             gameChannel.RaiseEvent(GameEvents.GameStartEvent);
         }
     }
